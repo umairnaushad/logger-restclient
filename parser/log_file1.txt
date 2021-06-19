@@ -1,0 +1,16 @@
+Aug 10 00:05:05 Mac Safari[4589]: KeychainGetIDCPStatus: status: on
+Aug 10 00:05:09 Mac Safari[4589]: KeychainGetIDCPStatus: status: off
+Aug 10 01:13:05 Mac syslogd[139]: ASL Sender Statistics 
+Aug 10 01:13:06 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: - ------- networkStatusForFlags 
+Aug 10 01:13:08 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: R ------- networkStatusForFlags 
+Aug 10 05:15:03 Mac syslogd[139]: ASL Sender Statistics 
+Aug 10 05:15:04 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: - ------- networkStatusForFlags 
+Aug 10 05:15:07 Mac systemstats[150]: assertion failed: 19F101: systemstats + 664509 [4BF178A4-6BF8-3581-95C2-C011DA23ECBB]: 0x7fbb89b0b050 
+Aug 10 05:15:09 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: R ------- networkStatusForFlags 
+Aug 10 06:24:56 Mac syslogd[139]: ASL Sender Statistics 
+Aug 10 06:24:59 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: - ------- networkStatusForFlags 
+Aug 10 06:25:00 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: R ------- networkStatusForFlags 
+Aug 10 06:25:02 Mac timed[180]: settimeofday({0x5f312e8e,0x1a450}) == 0 
+Aug 10 06:25:09 Mac timed[180]: settimeofday({0x5f312e8e,0x90354}) == 0 
+Aug 10 14:36:02 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: - ------- networkStatusForFlags 
+Aug 10 14:36:05 Mac timed[180]: settimeofday({0x5f31a1a5,0x3dc31}) == 0
