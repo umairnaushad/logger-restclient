@@ -7,20 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Height="200" Width="500" HorizontalAlignment="Left" Margin="12,21,0,0"
-                  x:Name="dataGridView1" VerticalAlignment="Top" RowHeight="30" ColumnWidth="100"
+        <DataGrid x:Name="dataGridView1" Height="200" Width="500" HorizontalAlignment="Left" Margin="12,21,0,0"
+                   VerticalAlignment="Top" RowHeight="100" ColumnWidth="100"
                   GridLinesVisibility="Vertical" HeadersVisibility="All" 
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue"
                   HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
                   SelectionMode="Single"
                   CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="idColumn"   Binding="{Binding Id}"/>
-                <DataGridTextColumn x:Name="nameColumn"   Binding="{Binding Name}"/>
-                <DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="idColumn"           Header="Id"             Binding="{Binding Id}"/>
+                <DataGridTextColumn x:Name="objectNumberColumn" Header="Object Number"  Binding="{Binding ObjectNumber}"/>
+                <DataGridTextColumn x:Name="titleColumn"        Header="Title"          Binding="{Binding Title}"/>
+                <DataGridTextColumn x:Name="longTitleColumn"    Header="Long Title"     Binding="{Binding LongTitle}"/>
+                <DataGridTemplateColumn x:Name="pictureColumn"    Header="Picture">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Photo}"></Image>
+                            <Image Source="{Binding Picture}"></Image>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

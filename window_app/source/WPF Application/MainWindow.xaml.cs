@@ -23,11 +23,10 @@ namespace WPFApplication
         public class Author
         {
             public int Id { get; set; }
-            public string Name { get; set; }
-            public DateTime DOB { get; set; }
-            public string BookTitle { get; set; }
-            public bool IsMVP { get; set; }
-            public ImageSource Photo { get; set; }
+            public string ObjectNumber { get; set; }
+            public string Title { get; set; }
+            public string LongTitle { get; set; }
+            public ImageSource Picture { get; set; }
         }
         private List<Author> LoadCollectionData()
         {
@@ -35,31 +34,11 @@ namespace WPFApplication
             authors.Add(new Author()
             {
                 Id = 101,
-                Name = "Mahesh Chand",
-                BookTitle = "Graphics Programming with GDI+",
-                DOB = new DateTime(1975, 2, 23),
-                IsMVP = false,
-                Photo = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory+ "images\\image1.png"))
+                ObjectNumber = "Umair",
+                Title = "Graphics Programming ",
+                LongTitle = "Graphics Programming with GDI+",
+                Picture = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory+ "images\\image1.png"))
             });
-            /*
-            authors.Add(new Author()
-            {
-                Id = 201,
-                Name = "Mike Gold",
-                BookTitle = "Programming C#",
-                DOB = new DateTime(1982, 4, 12),
-                IsMVP = true
-            });
-
-            authors.Add(new Author()
-            {
-                Id = 244,
-                Name = "Mathew Cochran",
-                BookTitle = "LINQ in Vista",
-                DOB = new DateTime(1985, 9, 11),
-                IsMVP = true
-            });
-            */
             return authors;
         }
 
