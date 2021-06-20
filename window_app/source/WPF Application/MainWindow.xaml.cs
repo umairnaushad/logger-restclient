@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPFApplication
 {
@@ -20,26 +10,35 @@ namespace WPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        public class Author
-        {
-            public int Id { get; set; }
-            public string ObjectNumber { get; set; }
-            public string Title { get; set; }
-            public string LongTitle { get; set; }
-            public ImageSource Picture { get; set; }
-        }
-        private List<Author> LoadCollectionData()
-        {
-            List<Author> authors = new List<Author>();
-            authors.Add(new Author()
+        List<Artwork> artworkList = new List<Artwork>();
+
+        private List<Artwork> LoadCollectionData()
+        {            
+            artworkList.Add(new Artwork()
             {
-                Id = 101,
-                ObjectNumber = "Umair",
-                Title = "Graphics Programming ",
-                LongTitle = "Graphics Programming with GDI+",
+                Id = "nl-BI-H-4615",
+                ObjectNumber = "BI-H-4615",
+                Title = "Paris-Artiste",
+                LongTitle = "Paris-artiste, Paris-Artiste, ca. 1883",
+                ProductionPlaces = "Parijs",
+                PresentingDate = "ca. 1883",
+                Width = "1957",
+                Height = "2500",
                 Picture = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory+ "images\\image1.png"))
             });
-            return authors;
+            artworkList.Add(new Artwork()
+            {
+                Id = "102",
+                ObjectNumber = "BI-H-4615",
+                Title = "Paris-Artiste",
+                LongTitle = "Paris-artiste, Paris-Artiste, ca. 1883",
+                ProductionPlaces = "Parijs",
+                PresentingDate = "ca. 1883",
+                Width = "1957",
+                Height = "2500",
+                Picture = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\image1.png"))
+            });
+            return artworkList;
         }
 
         public MainWindow()
@@ -49,8 +48,20 @@ namespace WPFApplication
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             dataGridView1.ItemsSource = LoadCollectionData();
+        }
+
+        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
+        {
+            int selected_index = dataGridView1.SelectedIndex + 1;
+            // this is used for debugging and testing.
+            //MessageBox.Show("The index of the row for the clicked cell is " + selected_index);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ArtworkForm win2 = new ArtworkForm(artworkList[0]);
+            win2.Show();
         }
     }
 }

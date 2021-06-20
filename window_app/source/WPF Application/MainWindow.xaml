@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Rijks Museum" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="dataGridView1" Height="200" Width="500" HorizontalAlignment="Left" Margin="12,21,0,0"
+        <DataGrid x:Name="dataGridView1" Height="370" Width="780" HorizontalAlignment="Center" Margin="0,54,0,0"
                    VerticalAlignment="Top" RowHeight="100" ColumnWidth="100"
                   GridLinesVisibility="Vertical" HeadersVisibility="All" 
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue"
                   HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
                   SelectionMode="Single"
-                  CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
+                  CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" CurrentCellChanged="dataGridView1_CurrentCellChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn"           Header="Id"             Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="objectNumberColumn" Header="Object Number"  Binding="{Binding ObjectNumber}"/>
@@ -28,7 +29,10 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="104,331,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="270,16,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Label Content="Select Artist" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="104,14,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="464,14,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

@@ -1,0 +1,31 @@
+﻿<Window x:Name="artworkForm" x:Class="WPFApplication.ArtworkForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApplication"
+        mc:Ignorable="d"
+        Title="ArtworkForm" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ScrollViewer x:Name="scrollViewer1" HorizontalScrollBarVisibility="Visible" Margin="10,107,10,10">
+            <Image x:Name="fullImage" Stretch="None" Source="{Binding Picture}" />
+        </ScrollViewer>
+        <Label Content="Id: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Object Number: " HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="Title: " HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Long Title: " HorizontalAlignment="Left" Margin="336,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Id" Content="Id: " HorizontalAlignment="Left" Margin="113,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_ObjectNumber" Content="Id: " HorizontalAlignment="Left" Margin="113,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Title" Content="Id: " HorizontalAlignment="Left" Margin="113,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Place: " HorizontalAlignment="Left" Margin="336,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date: " HorizontalAlignment="Left" Margin="336,72,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_LongTitle" Content="Long Title: " HorizontalAlignment="Left" Margin="409,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_ProductionPlaces" Content="Long Title: " HorizontalAlignment="Left" Margin="409,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_PresentingDate" Content="Date: " HorizontalAlignment="Left" Margin="409,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Width: " HorizontalAlignment="Left" Margin="623,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="Height: " HorizontalAlignment="Left" Margin="623,72,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Width" Content="Width: " HorizontalAlignment="Left" Margin="676,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Height" Content="Height: " HorizontalAlignment="Left" Margin="680,72,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
