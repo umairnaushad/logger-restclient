@@ -2,15 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using System.Drawing;
+using System.IO;
 
 namespace WPFApplication
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
         List<Artwork> artworkList = new List<Artwork>();
 
         public MainWindow()
@@ -50,9 +53,11 @@ namespace WPFApplication
         {
             RijksMuseumApi obj = new RijksMuseumApi();
             //List<Artwork> artObjectList = obj.GetArtistWorkByName("Paris-Artiste");
-            List<Artwork> artObjectList = obj.GetArtistWorkByName("Vincent van Gogh");
-            
-            dataGridView1.ItemsSource = artObjectList;
+            artworkList = obj.GetCollectionByArtistName("Vincent van Gogh");
+            //DownloadImages();
+
+
+            dataGridView1.ItemsSource = artworkList;
             //This is more like Task-Based Asynchronous Pattern
             return "Hi";// await Task.Run(() => words.ToList());
         }
@@ -63,5 +68,21 @@ namespace WPFApplication
             obj.getArtistsList();
             //dataGridView1.ItemsSource = artObjectList;
         }
+
+        public System.Drawing.Image GetReducedImage(int width, int height, Stream resourceImage)
+        {
+            try
+            {
+                var image = Image.FromStream(resourceImage);
+                var thumb = image.GetThumbnailImage(width, height, () => false, IntPtr.Zero);
+
+                return thumb;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
     }
 }

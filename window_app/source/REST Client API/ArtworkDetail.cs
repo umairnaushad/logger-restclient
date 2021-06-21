@@ -14,8 +14,11 @@ namespace REST_Client_API
         public int Width { get; set; }
         public int Height { get; set; }
         public string ImageURL { get; set; }
+
+        public string ImageLocalPath{ get; set; }
         public Artwork(string id, string objectNumber, string title, string longTitle,
-            string principalMakers, int width, int height, string imageURL)
+            string principalMakers, int width, int height, string imageURL,
+            string imageLocalPath)
         {
             this.Id = id;
             this.ObjectNumber = objectNumber;
@@ -25,6 +28,7 @@ namespace REST_Client_API
             this.Width = width;
             this.Height = height;
             this.ImageURL = imageURL;
+            this.ImageLocalPath = imageLocalPath; 
         }
     }
     public class ArtworkDetail
