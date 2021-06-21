@@ -31,11 +31,11 @@ namespace REST_Client_API
             
             var artworkList = JsonConvert.DeserializeObject<ArtistWorkDetail.Root>(jsonObject.ToString());
             List<Artwork> artworkParsedList = new List<Artwork>();
-            for (int i=0; i<count; i++)
+            for (int i=0; i< artworkList.artObjects.Count; i++)
             {
                 artworkParsedList.Add(new Artwork(artworkList.artObjects[i].id,
                     artworkList.artObjects[i].objectNumber, artworkList.artObjects[i].title,
-                    artworkList.artObjects[i].longTitle, artworkList.artObjects[i].productionPlaces[0],
+                    artworkList.artObjects[i].longTitle,
                     artworkList.artObjects[i].principalOrFirstMaker, 
                     artworkList.artObjects[i].webImage.width, artworkList.artObjects[i].webImage.height,
                     artworkList.artObjects[i].webImage.url
@@ -68,6 +68,10 @@ namespace REST_Client_API
         {
             restRequest = new RestRequest("collection?key=" + apiKey + "&q=artist", Method.GET);
             restResponse = (RestResponse)restClient.Execute(restRequest);
+            jsonObject = JObject.Parse(restResponse.Content);
+            int count = Int32.Parse(jsonObject.SelectToken("count").ToString());
+
+            //var artwork = JsonConvert.DeserializeObject<ArtworkDetail.Root>(jsonObject.ToString());
             Console.WriteLine("restResponse.Content = " + restResponse.Content.ToString());
         }
     }

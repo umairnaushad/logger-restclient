@@ -27,27 +27,41 @@ namespace WPFApplication
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            
+        }
+        
+        private void button_FetchArtwork_Click(object sender, RoutedEventArgs e)
+        {
+            button_FetchArtwork.IsEnabled = false;
+            //await FindWordCountsAsync();
+            FetchArtworkDetail();
+            button_FetchArtwork.IsEnabled = true;
+        }
+
+        private void button_ArtisList_Click(object sender, RoutedEventArgs e)
+        {
+            FetchArtistList();
             //ArtworkForm win2 = new ArtworkForm(artworkList[0]);
             //win2.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //dataGridView1.ItemsSource = LoadCollectionData();
-            button_FetchArtists.IsEnabled = false;
-            //var mode= await FindWordCountsAsync(quantity);
-            var mode = FindWordCountsAsync();
-            button_FetchArtists.IsEnabled = true;
-        }
-
         //public async Task<List<Words>> FindWordCountsAsync()
-        public string FindWordCountsAsync()
+        public string FetchArtworkDetail()
         {
             RijksMuseumApi obj = new RijksMuseumApi();
-            List<Artwork> artObjectList =  obj.GetArtistWorkByName("Paris-Artiste");
+            //List<Artwork> artObjectList = obj.GetArtistWorkByName("Paris-Artiste");
+            List<Artwork> artObjectList = obj.GetArtistWorkByName("Vincent van Gogh");
+            
             dataGridView1.ItemsSource = artObjectList;
             //This is more like Task-Based Asynchronous Pattern
             return "Hi";// await Task.Run(() => words.ToList());
+        }
+
+        public void FetchArtistList()
+        {
+            RijksMuseumApi obj = new RijksMuseumApi();
+            obj.getArtistsList();
+            //dataGridView1.ItemsSource = artObjectList;
         }
     }
 }
