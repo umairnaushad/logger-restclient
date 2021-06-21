@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using REST_Client_API;
+using System.Windows;
 
 namespace WPFApplication
 {
@@ -12,7 +13,7 @@ namespace WPFApplication
             InitializeComponent();
         }
         public ArtworkForm(Artwork artwork):this()
-        {
+        {/*
             fullImage.Source = artwork.Picture;
             label_Id.Content = artwork.Id;
             label_ObjectNumber.Content = artwork.ObjectNumber;
@@ -22,6 +23,7 @@ namespace WPFApplication
             label_PresentingDate.Content = artwork.PresentingDate;
             label_Width.Content = artwork.Width;
             label_Height.Content = artwork.Height;
+            */
         }
     }
 }

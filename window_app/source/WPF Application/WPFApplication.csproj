@@ -10,4 +10,10 @@
     <OutputPath>../../exe</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="REST Client API">
+      <HintPath>..\..\exe\netcoreapp3.1\REST Client API.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

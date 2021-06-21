@@ -23,13 +23,13 @@
                 <DataGridTemplateColumn x:Name="pictureColumn"    Header="Picture">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Picture}"></Image>
+                            <Image Source="{Binding ImageURL}"></Image>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="270,16,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button x:Name="button_FetchArtists" Content="Button" HorizontalAlignment="Left" Margin="270,16,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Label Content="Select Artist" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="104,14,0,0" VerticalAlignment="Top" Width="120"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="464,14,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>

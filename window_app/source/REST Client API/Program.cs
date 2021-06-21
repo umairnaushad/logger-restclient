@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using RestSharp.Authenticators;
+using System;
+using System.Collections.Generic;
+using System.Net;
 
 namespace REST_Client_API
 {
-    class RijksMuseumApi
+    public class RijksMuseumApi
     {
-        private string apiKey="tckFvOqN";
-        private string uri= "https://www.rijksmuseum.nl/api/nl/";
+        private readonly string apiKey="tckFvOqN";
+        private readonly string uri= "https://www.rijksmuseum.nl/api/en/";
         private RestRequest restRequest;
         private RestClient restClient;
         private RestResponse restResponse;
@@ -21,19 +21,47 @@ namespace REST_Client_API
             restClient = new RestClient(uri);
         }
 
-        public void getCollectionByArtistName(string artistName)
-        {            
+        public List<Artwork> GetArtistWorkByName(string artistName) {            
             restRequest = new RestRequest("collection?key="+ apiKey +"&involvedMaker="+artistName, Method.GET);
+            restResponse = (RestResponse)restClient.Execute(restRequest);
+            jsonObject = JObject.Parse(restResponse.Content);
+            int count = Int32.Parse(jsonObject.SelectToken("count").ToString());
+            Console.WriteLine("====== Response ======");
+            Console.WriteLine("count= " + count);
+            
+            var artworkList = JsonConvert.DeserializeObject<ArtistWorkDetail.Root>(jsonObject.ToString());
+            List<Artwork> artworkParsedList = new List<Artwork>();
+            for (int i=0; i<count; i++)
+            {
+                artworkParsedList.Add(new Artwork(artworkList.artObjects[i].id,
+                    artworkList.artObjects[i].objectNumber, artworkList.artObjects[i].title,
+                    artworkList.artObjects[i].longTitle, artworkList.artObjects[i].productionPlaces[0],
+                    artworkList.artObjects[i].principalOrFirstMaker, 
+                    artworkList.artObjects[i].webImage.width, artworkList.artObjects[i].webImage.height,
+                    artworkList.artObjects[i].webImage.url
+                    ));
+            }
+
+            return artworkParsedList;
+        }
+
+        public void getArtworkDetailByObjectNumber(string objectNumber)
+        {
+            restRequest = new RestRequest("collection/"+objectNumber+"?key=" + apiKey, Method.GET);
             restResponse = (RestResponse)restClient.Execute(restRequest);
             Console.WriteLine("restResponse.Content = " + restResponse.Content.ToString());
             jsonObject = JObject.Parse(restResponse.Content);
-            var count = jsonObject.SelectToken("count").ToString();
+            //var count = jsonObject.SelectToken("count").ToString();
             Console.WriteLine("====== Response ======");
-            Console.WriteLine("count= " + count);
-            var artistWork = JsonConvert.DeserializeObject<ArtistWork.Root>(jsonObject.ToString());
+            //Console.WriteLine("count= " + count);
+            var artwork = JsonConvert.DeserializeObject<ArtworkDetail.Root>(jsonObject.ToString());
             Console.WriteLine("====== Response ======");
-            Console.WriteLine("count= " + artistWork.count);
-            //Product deserializedProduct = JsonConvert.DeserializeObject<Product>(output);
+            Console.WriteLine("url= " + artwork.artObject.webImage.url);
+            string url = artwork.artObject.webImage.url;
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(new Uri(url), "Image.png");
+            }
         }
 
         public void getArtistsList()
@@ -41,29 +69,6 @@ namespace REST_Client_API
             restRequest = new RestRequest("collection?key=" + apiKey + "&q=artist", Method.GET);
             restResponse = (RestResponse)restClient.Execute(restRequest);
             Console.WriteLine("restResponse.Content = " + restResponse.Content.ToString());
-
-        }
-
-        public void ParseResponseArtistList()
-        {
-            Console.WriteLine("====== ParseResponse ======");
-            jsonObject = JObject.Parse(restResponse.Content);
-            var count = jsonObject.SelectToken("count").ToString();
-            Console.WriteLine("====== Response ======");
-            Console.WriteLine("count= " + count);
-            
-        }
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-            RijksMuseumApi obj = new RijksMuseumApi();
-            //obj.getArtistsList();
-            //obj.ParseResponseArtistList();
-            obj.getCollectionByArtistName("Paris-Artiste");
         }
     }
 }

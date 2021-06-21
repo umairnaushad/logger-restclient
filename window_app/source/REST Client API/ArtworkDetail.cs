@@ -4,6 +4,32 @@ using System.Text;
 
 namespace REST_Client_API
 {
+    public class Artwork
+    {
+        public string Id { get; set; }
+        public string ObjectNumber { get; set; }
+        public string Title { get; set; }
+        public string LongTitle { get; set; }
+        public string ProductionPlaces { get; set; }
+        public string PrincipalMakers { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public string ImageURL { get; set; }
+        public Artwork(string id, string objectNumber, string title, string longTitle,
+            string productionPlaces, string principalMakers, int width, int height,
+            string imageURL)
+        {
+            this.Id = id;
+            this.ObjectNumber = objectNumber;
+            this.Title = title;
+            this.LongTitle = longTitle;
+            this.ProductionPlaces = productionPlaces;
+            this.PrincipalMakers = principalMakers;
+            this.Width = width;
+            this.Height = height;
+            this.ImageURL = imageURL;
+        }
+    }
     public class ArtworkDetail
     {
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 

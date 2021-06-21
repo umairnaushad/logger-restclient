@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace WPFApplication
 {
-    public class Artwork
+    public class Artwork2
     {
         public string Id { get; set; }
         public string ObjectNumber { get; set; }
