@@ -26,6 +26,7 @@ namespace REST_Client_API
         public List<Artwork> GetCollectionByArtistName(string artistName) {
             string imageSourceUrl = "";
             string imageLocalPath = "";
+            string imageLocalPathThumbnail = "";
 
             restRequest = new RestRequest("collection?key="+ apiKey +"&involvedMaker="+artistName, Method.GET);
             restResponse = (RestResponse)restClient.Execute(restRequest);
@@ -40,15 +41,16 @@ namespace REST_Client_API
                 {
                     imageSourceUrl = artworkList.artObjects[i].webImage.url;
                     imageLocalPath = Directory.GetCurrentDirectory() + "\\images\\" + artworkList.artObjects[i].objectNumber + ".png";
-                    artworkParsedList.Add(new Artwork(artworkList.artObjects[i].id,
+                    imageLocalPathThumbnail = Directory.GetCurrentDirectory() + "\\images\\" + artworkList.artObjects[i].objectNumber + "-thumbnail.png";
+                    artworkParsedList.Add(new Artwork(i+1+"",
                         artworkList.artObjects[i].objectNumber, artworkList.artObjects[i].title,
                         artworkList.artObjects[i].longTitle,
                         artworkList.artObjects[i].principalOrFirstMaker,
                         artworkList.artObjects[i].webImage.width, artworkList.artObjects[i].webImage.height,
-                        artworkList.artObjects[i].webImage.url, imageLocalPath
+                        artworkList.artObjects[i].webImage.url, imageLocalPath, imageLocalPathThumbnail
                         ));
                     
-                    client.DownloadFile(new Uri(imageSourceUrl), imageLocalPath);
+                    //client.DownloadFile(new Uri(imageSourceUrl), imageLocalPath);
                 }                
             }
 

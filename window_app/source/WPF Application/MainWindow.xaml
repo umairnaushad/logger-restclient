@@ -8,13 +8,14 @@
         Title="Rijks Museum" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="dataGridView1" Height="352" Width="780" HorizontalAlignment="Center" Margin="0,54,0,0"
-                   VerticalAlignment="Top" RowHeight="100" ColumnWidth="100"
+        <DataGrid x:Name="dataGridView1" Height="273" Width="780" HorizontalAlignment="Center" Margin="0,89,0,0"
+                  VerticalAlignment="Top" RowHeight="100" ColumnWidth="100"
                   GridLinesVisibility="Vertical" HeadersVisibility="All" 
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue"
                   HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
                   SelectionMode="Single"
-                  CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" CurrentCellChanged="dataGridView1_CurrentCellChanged">
+                  CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" 
+                  CurrentCellChanged="dataGridView1_CurrentCellChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn"           Header="Id"             Binding="{Binding Id}"/>
                 <DataGridTextColumn x:Name="objectNumberColumn" Header="Object Number"  Binding="{Binding ObjectNumber}"/>
@@ -23,7 +24,7 @@
                 <DataGridTemplateColumn x:Name="pictureColumn"    Header="Picture">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ImageLocalPath}"></Image>
+                            <Image Source="{Binding ImageLocalPathThumbnail}"></Image>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -32,7 +33,14 @@
         <Button x:Name="button_FetchArtwork" Content="Button" HorizontalAlignment="Left" Margin="270,16,0,0" VerticalAlignment="Top" Click="button_FetchArtwork_Click"/>
         <Label Content="Select Artist" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="104,14,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="464,14,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-
+        <Button Content="Button" HorizontalAlignment="Left" Margin="464,14,0,0" VerticalAlignment="Top"/>
+        
+        <Grid x:Name="grd_PageButtons" Margin="10,367,10,10">
+            <Label x:Name="lb_PagrInfo" Content="..." HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button x:Name="btn_Forward" Content="&gt;" HorizontalAlignment="Center" Margin="150,0,0,0" VerticalAlignment="Center" Click="btn_Next"/>
+            <Button x:Name="btn_LastPage" Content="&gt;&gt;" HorizontalAlignment="Center" Margin="200,0,0,0" VerticalAlignment="Center" Click="btn_LastPage_Click"/>
+            <Button x:Name="btn_Previous" Content="&lt;" HorizontalAlignment="Center" Margin="-150,0,0,0" VerticalAlignment="Center" Click="btn_Previous_Click"/>
+            <Button x:Name="btn_FirstPage" Content="&lt;&lt;" HorizontalAlignment="Center" Margin="-200,0,0,0" VerticalAlignment="Center"  Width="20" Height="20" Click="btn_FirstPage_Click"/>
+        </Grid>
     </Grid>
 </Window>
