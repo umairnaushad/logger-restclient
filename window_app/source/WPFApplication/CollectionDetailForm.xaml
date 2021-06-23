@@ -12,28 +12,28 @@
             <Image x:Name="image_Large" Source="{Binding ImageLocalPath}" Height="606" Width="1142"/>
         </ScrollViewer>
         <Grid x:Name="grid" Margin="0,0,0,598">
-            <Label Content="Elapsed Seconds (ms): " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Label Content="Object Number: " HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
-            <Label Content="Priref: " HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+            <Label FontWeight="Bold" Content="Elapsed Seconds (ms): " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label FontWeight="Bold" Content="Object Number: " HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+            <Label FontWeight="Bold" Content="Priref: " HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label_ElapsedMilliseconds" Content="{Binding Path=ElapsedMilliseconds}" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label_ObjectNumber" Content="{Binding Path=ObjectNumber}" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label_Priref" Content="{Binding Path=Priref}" HorizontalAlignment="Left" Margin="130,70,0,0" VerticalAlignment="Top"/>
-            <Label Content="Principal Maker: " HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top"/>
-            <Label Content="Acquisition Method: " HorizontalAlignment="Left" Margin="330,40,0,0" VerticalAlignment="Top"/>
-            <Label Content="Acquisition Date: " HorizontalAlignment="Left" Margin="330,70,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label_PrincipalMaker" Content="{Binding Path=PrincipalMaker}" HorizontalAlignment="Left" Margin="440,10,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label_AcquisitionMethod" Content="{Binding Path=AcquisitionMethod}" HorizontalAlignment="Left" Margin="440,40,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label_AcquisitionDate" Content="{Binding Path=AcquisitionDate}" HorizontalAlignment="Left" Margin="440,70,0,0" VerticalAlignment="Top"/>
-            <Label Content="GUID: " HorizontalAlignment="Left" Margin="630,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-            <Label Content="Width: " HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-            <Label Content="Height: " HorizontalAlignment="Left" Margin="630,70,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+            <Label FontWeight="Bold" Content="Principal Maker: " HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top"/>
+            <Label FontWeight="Bold" Content="Acquisition Method: " HorizontalAlignment="Left" Margin="330,40,0,0" VerticalAlignment="Top"/>
+            <Label FontWeight="Bold" Content="Acquisition Date: " HorizontalAlignment="Left" Margin="330,70,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_PrincipalMaker" Content="{Binding Path=PrincipalMaker}" HorizontalAlignment="Left" Margin="460,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_AcquisitionMethod" Content="{Binding Path=AcquisitionMethod}" HorizontalAlignment="Left" Margin="460,40,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_AcquisitionDate" Content="{Binding Path=AcquisitionDate}" HorizontalAlignment="Left" Margin="460,70,0,0" VerticalAlignment="Top"/>
+            <Label FontWeight="Bold" Content="GUID: " HorizontalAlignment="Left" Margin="630,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+            <Label FontWeight="Bold" Content="Width: " HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+            <Label FontWeight="Bold" Content="Height: " HorizontalAlignment="Left" Margin="630,70,0,0" VerticalAlignment="Top" Grid.Column="1"/>
             <Label x:Name="label_Guid" Content="{Binding Path=Guid}" HorizontalAlignment="Left" Margin="680,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
             <Label x:Name="label_Width" Content="{Binding Path=Width}" HorizontalAlignment="Left" Margin="680,40,0,0" VerticalAlignment="Top" Grid.Column="1"/>
             <Label x:Name="label_Height" Content="{Binding Path=Height}" HorizontalAlignment="Left" Margin="680,70,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-            
+
+            <Label FontWeight="Bold" Content="Long Title: " HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+            <Label FontWeight="Bold" Content="Description: " HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label_LongTitle" Content="{Binding Path=LongTitle}" HorizontalAlignment="Left" Margin="130,100,0,0" VerticalAlignment="Top"/>
-            <Label Content="Long Title: " HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
-            <Label Content="Description: " HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
             <TextBlock x:Name="label_Description" Text="{Binding Path=Description}" HorizontalAlignment="Left" Margin="130,130,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
