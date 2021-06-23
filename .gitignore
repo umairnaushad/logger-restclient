@@ -156,7 +156,8 @@ bld/
 
 *.pdb
 *./exe/*
-window_app/exe/
+window_app/exe/netcoreapp3.1/*
+
 !window_app/exe/netcoreapp3.1/RestSharp.dll
 !window_app/exe/netcoreapp3.1/Newtonsoft.Json.dll
 
