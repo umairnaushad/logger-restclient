@@ -1,4 +1,6 @@
-﻿namespace RESTClient
+﻿using System.Drawing;
+
+namespace RESTClient
 {
     public class ArtCollectionList
     {
@@ -12,6 +14,7 @@
         public string ImageURL { get; set; }
         public string ImageLocalPath { get; set; }
         public string ImageLocalPathThumbnail { get; set; }
+        public Image ThumbnailImage { get; set; }
         public ArtCollectionList(string id, string objectNumber, string title, string longTitle,
             string principalMakers, int width, int height, string imageURL,
             string imageLocalPath, string imageLocalPathThumbnail)

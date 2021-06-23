@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace RESTClient
 {
@@ -15,9 +16,12 @@ namespace RESTClient
         public string AcquisitionMethod { get; set; }
         public string AcquisitionDate { get; set; }
         public string LongTitle { get; set; }
+        public string ImageURL { get; set; }
+        public string ImageLocalPath { get; set; }
+        public Image fullSizeImage { get; set; }
         public ArtCollectionDetail(string priref, int elapsedMilliseconds, string objectNumber, string guid, int width,
             int height, string description, string principalMaker, string acquisitionMethod,
-            DateTime acquisitionDate, string longTitle)
+            DateTime acquisitionDate, string longTitle, string imageURL, string imageLocalPath)
         {
             this.Priref = priref;
             this.ElapsedMilliseconds = elapsedMilliseconds.ToString();
@@ -30,6 +34,8 @@ namespace RESTClient
             this.AcquisitionMethod = acquisitionMethod;
             this.AcquisitionDate = acquisitionDate.ToString();
             this.LongTitle = longTitle;
+            this.ImageURL = imageURL;
+            this.ImageLocalPath = imageLocalPath;
         }
     }
 }

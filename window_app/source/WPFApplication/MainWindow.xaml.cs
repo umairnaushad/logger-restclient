@@ -13,55 +13,21 @@ namespace WPFApplication
         private readonly int numberOfRecPerPage = 5;
         private ArtworkPagging artworkPagedTable = new ArtworkPagging();
         private IList<ArtCollectionList> artworkList = new List<ArtCollectionList>();
-        RijksMuseumApi museumApi = new RijksMuseumApi();
+        private IList<ArtCollectionList> artworkListNull = new List<ArtCollectionList>();
+        private RijksMuseumApi museumApi = new RijksMuseumApi();
 
         public MainWindow()
         {
             InitializeComponent();
+            PopulateArtistListFromFile();
         }
 
         private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
         {
-            int selected_index = dataGridView1.SelectedIndex + 1;
-            // this is used for debugging and testing.
-            //MessageBox.Show("The index of the row for the clicked cell is " + selected_index);
-        }
-                
-        private void button_FetchArtwork_Click(object sender, RoutedEventArgs e)
-        {
-            button_FetchArtwork.IsEnabled = false;
-            //await FetchArtworkDetail();
-            FetchArtworkDetail();
-            SaveImageAsThumbnails();
-            button_FetchArtwork.IsEnabled = true;
+            
         }
 
-        private void button_ArtisList_Click(object sender, RoutedEventArgs e)
-        {
-            FetchArtistList();
-        }
-
-        //public async Task<List<Words>> FindWordCountsAsync()
-        public string FetchArtworkDetail()
-        {
-            //List<Artwork> artObjectList = obj.GetArtistWorkByName("Paris-Artiste");
-            artworkList = museumApi.GetCollectionsListByArtistName("Vincent van Gogh");
-            //DownloadImages();
-            dataGridView1.ItemsSource = artworkPagedTable.First(artworkList, numberOfRecPerPage).DefaultView;
-            lb_PagrInfo.Content = PageNumberDisplay();
-            //This is more like Task-Based Asynchronous Pattern
-            return "Hi";// await Task.Run(() => words.ToList());
-        }
-
-        public void FetchArtistList()
-        {
-            museumApi.getArtistsList();
-            //dataGridView1.ItemsSource = artObjectList;
-        }
-
-
-
-
+        #region Pagging
 
         public string PageNumberDisplay()
         {
@@ -71,8 +37,6 @@ namespace WPFApplication
             {
                 lastNumber = artworkList.Count;
             }
-            //This dramatically reduced the number of times I had to write this string statement
-            //return "Showing " + PagedNstartumber + " of " + artworkList.Count; 
             return "" + firstNumber + " -  " + lastNumber + " (" + artworkList.Count + ")";
         }
 
@@ -88,7 +52,6 @@ namespace WPFApplication
             lb_PagrInfo.Content = PageNumberDisplay();
         }
 
-
         private void btn_LastPage_Click(object sender, RoutedEventArgs e)
         {
             dataGridView1.ItemsSource = artworkPagedTable.Last(artworkList, numberOfRecPerPage).DefaultView;
@@ -100,6 +63,111 @@ namespace WPFApplication
             dataGridView1.ItemsSource = artworkPagedTable.First(artworkList, numberOfRecPerPage).DefaultView;
             lb_PagrInfo.Content = PageNumberDisplay();
         }
+
+        #endregion
+
+        #region UI Controls
+
+        private void button_FetchCollectionList_Click(object sender, RoutedEventArgs e)
+        {
+            button_FetchCollectionList.IsEnabled = false;
+            //ClearImages();
+            //await FetchArtworkDetail();
+            FetchCollectionList();
+            SaveImageAsThumbnails();
+            button_FetchCollectionList.IsEnabled = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            ClearImages();
+        }
+
+        private void ClearImages()
+        {
+            dataGridView1.ItemsSource = artworkListNull;
+            dataGridView1.ItemsSource = null;
+            dataGridView1.Items.Refresh();
+            dataGridView1.Items.Refresh();
+        }
+
+        #endregion
+
+        #region REST API Calls
+
+        //public async Task<List<Words>> FindWordCountsAsync()
+        public void FetchCollectionList()
+        {
+            artworkList = museumApi.GetCollectionsListByArtistName(cb_ArtistName.SelectedItem.ToString());
+            dataGridView1.ItemsSource = artworkPagedTable.First(artworkList, numberOfRecPerPage).DefaultView;
+            lb_PagrInfo.Content = PageNumberDisplay();
+        }
+
+        #endregion
+
+        #region Utility Functions
+
+        private void PopulateArtistListFromFile()
+        {
+            string[] lineOfContents = File.ReadAllLines("artistsList.txt");
+            foreach (var line in lineOfContents)
+            {
+                cb_ArtistName.Items.Add(line.Trim());
+            }
+            cb_ArtistName.SelectedIndex = 0;
+        }
+
+        private void SaveImageAsThumbnails()
+        {
+            Stream stream;
+            Image image;
+            Image thumbnail;
+            using WebClient client = new WebClient();
+            for (int i = 0; i < artworkList.Count; i++)
+            {
+                stream = client.OpenRead(artworkList[i].ImageURL);
+                image = Image.FromStream(stream);
+                System.Drawing.Size thumbnailSize = GetThumbnailSize(image);
+
+                thumbnail = image.GetThumbnailImage(thumbnailSize.Width,
+                    thumbnailSize.Height, null, IntPtr.Zero);
+
+                if (!File.Exists(artworkList[i].ImageLocalPathThumbnail))
+                {
+                    thumbnail.Save(artworkList[i].ImageLocalPathThumbnail);
+                }
+                artworkList[i].ThumbnailImage = thumbnail;
+            }
+        }
+
+        private System.Drawing.Size GetThumbnailSize(Image original)
+        {
+            const int maxPixels = 80;
+            int originalWidth = original.Width;
+            int originalHeight = original.Height;
+
+            // Compute best factor to scale entire image based on larger dimension.
+            double factor;
+            if (originalWidth > originalHeight)
+            {
+                factor = (double)maxPixels / originalWidth;
+            }
+            else
+            {
+                factor = (double)maxPixels / originalHeight;
+            }
+
+            return new System.Drawing.Size((int)(originalWidth * factor), (int)(originalHeight * factor));
+        }
+
+        #endregion
+
+
+
+
+
+
 
 
         private void SaveImageAsThumbnails_2()
@@ -116,60 +184,27 @@ namespace WPFApplication
                 }
             }
         }
-
-
-        private void SaveImageAsThumbnails()
+                
+        private Image GetCopyImage(string path)
         {
-            Stream stream;
-            Image image;
-            Image thumbnail;
-            using WebClient client = new WebClient();
-            for (int i = 0; i < artworkList.Count; i++)
+            using (Image im = Image.FromFile(path))
             {
-                stream = client.OpenRead(artworkList[i].ImageURL);
-                //Image image = Image.FromFile(artworkList[i].ImageLocalPath);
-                image = Image.FromStream(stream);
-
-                System.Drawing.Size thumbnailSize = GetThumbnailSize(image);
-
-                thumbnail = image.GetThumbnailImage(thumbnailSize.Width,
-                    thumbnailSize.Height, null, IntPtr.Zero);
-
-                thumbnail.Save(artworkList[i].ImageLocalPathThumbnail);
+                Bitmap bm = new Bitmap(im);
+                return bm;
             }
         }
 
-
-
-        static System.Drawing.Size GetThumbnailSize(Image original)
+        private void dataGridView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Maximum size of any dimension.
-            const int maxPixels = 80;
-
-            // Width and height.
-            int originalWidth = original.Width;
-            int originalHeight = original.Height;
-
-            // Compute best factor to scale entire image based on larger dimension.
-            double factor;
-            if (originalWidth > originalHeight)
+            int selectedIndex = dataGridView1.SelectedIndex;
+            if (selectedIndex >= 0 && selectedIndex < artworkList.Count)
             {
-                factor = (double)maxPixels / originalWidth;
+                string objecNumber = artworkList[selectedIndex].ObjectNumber;
+                MessageBox.Show(selectedIndex + " - " + objecNumber);
+                //ArtCollectionDetail detail = museumApi.GetCollectionDetailByObjectNumber(objecNumber);
+                //ArtworkForm win2 = new ArtworkForm(detail);
+                //win2.ShowDialog();
             }
-            else
-            {
-                factor = (double)maxPixels / originalHeight;
-            }
-
-            // Return thumbnail size.
-            return new System.Drawing.Size((int)(originalWidth * factor), (int)(originalHeight * factor));
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ArtCollectionDetail detail = museumApi.GetCollectionDetailByObjectNumber("RP-P-OB-20.603");
-            ArtworkForm win2 = new ArtworkForm(detail);
-            win2.Show();
         }
     }
 }

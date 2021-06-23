@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <ScrollViewer x:Name="scrollViewer1" HorizontalScrollBarVisibility="Visible" Margin="20,140,20,20">
-            <Image x:Name="image_Large" Height="606" Width="1142"/>
+            <Image x:Name="image_Large" Source="{Binding ImageLocalPath}" Height="606" Width="1142"/>
         </ScrollViewer>
         <Grid x:Name="grid" Margin="0,0,0,598">
             <Label Content="Elapsed Seconds (ms): " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>

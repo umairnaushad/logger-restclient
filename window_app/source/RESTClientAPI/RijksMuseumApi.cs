@@ -55,24 +55,18 @@ namespace RESTClient
             restResponse = (RestResponse)restClient.Execute(restRequest);
             jsonObject = JObject.Parse(restResponse.Content);
             CollectionDetailAPIResponse.Root detail = JsonConvert.DeserializeObject<CollectionDetailAPIResponse.Root>(jsonObject.ToString());
+            string imageLocalPath = Directory.GetCurrentDirectory() + "\\images\\" + detail.artObject.objectNumber + ".png";
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(new Uri(detail.artObject.webImage.url), imageLocalPath);
+            }
             return new ArtCollectionDetail(detail.artObject.priref,
                 detail.elapsedMilliseconds, detail.artObject.objectNumber, detail.artObject.webImage.guid,
                 detail.artObject.webImage.width, detail.artObject.webImage.height,
                 detail.artObject.description, detail.artObject.principalMaker,
                 detail.artObject.acquisition.method, detail.artObject.acquisition.date,
-                detail.artObject.longTitle
+                detail.artObject.longTitle, detail.artObject.webImage.url, imageLocalPath
                 );
-        }
-
-        public void getArtistsList()
-        {
-            restRequest = new RestRequest("collection?key=" + apiKey + "&q=artist", Method.GET);
-            restResponse = (RestResponse)restClient.Execute(restRequest);
-            jsonObject = JObject.Parse(restResponse.Content);
-            int count = Int32.Parse(jsonObject.SelectToken("count").ToString());
-
-            //var artwork = JsonConvert.DeserializeObject<ArtworkDetail.Root>(jsonObject.ToString());
-            Console.WriteLine("restResponse.Content = " + restResponse.Content.ToString());
         }
     }
 }
