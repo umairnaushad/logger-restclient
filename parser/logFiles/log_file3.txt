@@ -1,0 +1,2 @@
+Aug 10 00:05:05 Mac Safari[4589]: KeychainGetIDCPStatus: status: on
+Aug 10 00:05:09 Mac Safari[4589]: KeychainGetIDCPStatus: status: off

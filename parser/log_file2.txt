@@ -1,0 +1,5 @@
+Aug 10 00:05:05 Mac Safari[4589]: KeychainGetIDCPStatus: status: on
+Aug 10 00:05:09 Mac Safari[4589]: KeychainGetIDCPStatus: status: off
+Aug 10 01:13:05 Mac syslogd[139]: ASL Sender Statistics 
+Aug 10 01:13:06 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: - ------- networkStatusForFlags 
+Aug 10 01:13:08 Mac Microsoft Remote Desktop[4395]: Reachability Flag Status: R ------- networkStatusForFlags 

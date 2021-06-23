@@ -1,6 +1,6 @@
 # logger-restclient
 
-dotnet test --logger "console;verbosity=detailed"
+dotnet test RESTClientNUnitTests.dll --logger "console;verbosity=detailed;html"
+dotnet test --logger "console;verbosity=detailed;html"
 
-dotnet test --work:"mypath/myresult.xml"
 dotnet test RESTClientNUnitTests.dll --logger html

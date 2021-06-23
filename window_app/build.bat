@@ -1,2 +1,2 @@
-dotnet build source\RESTClientAPI\RESTClientAPI.csproj
-dotnet build source\WPFApplication\WPFApplication.csproj
+dotnet publish -c Release source\RESTClientAPI\
+dotnet publish -c Release source\WPFApplication\

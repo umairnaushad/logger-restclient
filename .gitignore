@@ -127,3 +127,35 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+images/
+*.pdb
+*.exe/*
+!/window_appexe/netcoreapp3.1/RestSharp.dll
+!/window_appexe/netcoreapp3.1/Newtonsoft.Json.dll
