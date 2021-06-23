@@ -1,4 +1,4 @@
-﻿using REST_Client_API;
+﻿using RESTClient;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,9 +9,10 @@ namespace WPFApplication
 {
     public partial class MainWindow : Window
     {
-        private int numberOfRecPerPage = 5; 
+        private readonly int numberOfRecPerPage = 5;
         private ArtworkPagging artworkPagedTable = new ArtworkPagging();
-        private IList<Artwork> artworkList = new List<Artwork>();
+        private IList<ArtCollectionList> artworkList = new List<ArtCollectionList>();
+        RijksMuseumApi museumApi = new RijksMuseumApi();
 
         public MainWindow()
         {
@@ -37,16 +38,13 @@ namespace WPFApplication
         private void button_ArtisList_Click(object sender, RoutedEventArgs e)
         {
             FetchArtistList();
-            //ArtworkForm win2 = new ArtworkForm(artworkList[0]);
-            //win2.Show();
         }
 
         //public async Task<List<Words>> FindWordCountsAsync()
         public string FetchArtworkDetail()
         {
-            RijksMuseumApi obj = new RijksMuseumApi();
             //List<Artwork> artObjectList = obj.GetArtistWorkByName("Paris-Artiste");
-            artworkList = obj.GetCollectionByArtistName("Vincent van Gogh");
+            artworkList = museumApi.GetCollectionsListByArtistName("Vincent van Gogh");
             //DownloadImages();
             dataGridView1.ItemsSource = artworkPagedTable.First(artworkList, numberOfRecPerPage).DefaultView;
             lb_PagrInfo.Content = PageNumberDisplay();
@@ -56,8 +54,7 @@ namespace WPFApplication
 
         public void FetchArtistList()
         {
-            RijksMuseumApi obj = new RijksMuseumApi();
-            obj.getArtistsList();
+            museumApi.getArtistsList();
             //dataGridView1.ItemsSource = artObjectList;
         }
 
@@ -124,7 +121,6 @@ namespace WPFApplication
 
         static System.Drawing.Size GetThumbnailSize(Image original)
         {
-
             // Maximum size of any dimension.
             const int maxPixels = 80;
 
@@ -147,5 +143,11 @@ namespace WPFApplication
             return new System.Drawing.Size((int)(originalWidth * factor), (int)(originalHeight * factor));
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ArtCollectionDetail detail = museumApi.GetCollectionDetailByObjectNumber("RP-P-OB-20.603");
+            ArtworkForm win2 = new ArtworkForm(detail);
+            win2.Show();
+        }
     }
 }

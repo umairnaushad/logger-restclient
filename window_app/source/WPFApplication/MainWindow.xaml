@@ -33,7 +33,7 @@
         <Button x:Name="button_FetchArtwork" Content="Button" HorizontalAlignment="Left" Margin="270,16,0,0" VerticalAlignment="Top" Click="button_FetchArtwork_Click"/>
         <Label Content="Select Artist" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="104,14,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="464,14,0,0" VerticalAlignment="Top"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="464,14,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         
         <Grid x:Name="grd_PageButtons" Margin="10,367,10,10">
             <Label x:Name="lb_PagrInfo" Content="..." HorizontalAlignment="Center" VerticalAlignment="Center" />

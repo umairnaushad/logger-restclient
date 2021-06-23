@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace REST_Client_API
+namespace RESTClient
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
-    public class ArtistWorkDetail
+    public class CollectionListAPIResponse
     {
         public class Facet
         {

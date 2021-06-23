@@ -1,4 +1,4 @@
-﻿using REST_Client_API;
+﻿using RESTClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +12,7 @@ namespace WPFApplication
 
         DataTable PagedList = new DataTable();
 
-        public DataTable Next(IList<Artwork> ListToPage, int RecordsPerPage)
+        public DataTable Next(IList<ArtCollectionList> ListToPage, int RecordsPerPage)
         {
             PageIndex++;
             if (PageIndex >= ListToPage.Count / RecordsPerPage)
@@ -23,7 +23,7 @@ namespace WPFApplication
             return PagedList;
         }
 
-        public DataTable Previous(IList<Artwork> ListToPage, int RecordsPerPage)
+        public DataTable Previous(IList<ArtCollectionList> ListToPage, int RecordsPerPage)
         {
             PageIndex--;
             if (PageIndex <= 0)
@@ -34,24 +34,24 @@ namespace WPFApplication
             return PagedList;
         }
                 
-        public DataTable First(IList<Artwork> ListToPage, int RecordsPerPage)
+        public DataTable First(IList<ArtCollectionList> ListToPage, int RecordsPerPage)
         {
             PageIndex = 0;
             PagedList = SetPaging(ListToPage, RecordsPerPage);
             return PagedList;
         }
 
-        public DataTable Last(IList<Artwork> ListToPage, int RecordsPerPage)
+        public DataTable Last(IList<ArtCollectionList> ListToPage, int RecordsPerPage)
         {
             PageIndex = ListToPage.Count / RecordsPerPage;
             PagedList = SetPaging(ListToPage, RecordsPerPage);
             return PagedList;
         }
-		public DataTable SetPaging(IList<Artwork> ListToPage, int RecordsPerPage)
+		public DataTable SetPaging(IList<ArtCollectionList> ListToPage, int RecordsPerPage)
         {
             int PageGroup = PageIndex * RecordsPerPage;
 
-            IList<Artwork> PagedList = new List<Artwork>();
+            IList<ArtCollectionList> PagedList = new List<ArtCollectionList>();
 
             PagedList = ListToPage.Skip(PageGroup).Take(RecordsPerPage).ToList(); //This is where the Magic Happens. If you have a Specific sort or want to return ONLY a specific set of columns, add it to this LINQ Query.
 

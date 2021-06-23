@@ -1,0 +1,2 @@
+dotnet build source\RESTClientAPI\RESTClientAPI.csproj
+dotnet build source\WPFApplication\WPFApplication.csproj

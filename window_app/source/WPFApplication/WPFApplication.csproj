@@ -10,13 +10,17 @@
     <OutputPath>../../exe</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\exe</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="REST Client API">
-      <HintPath>..\..\exe\netcoreapp3.1\REST Client API.dll</HintPath>
+    <Reference Include="RESTClientAPI">
+      <HintPath>..\..\exe\netcoreapp3.1\RESTClientAPI.dll</HintPath>
     </Reference>
   </ItemGroup>
 
