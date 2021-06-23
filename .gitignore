@@ -154,8 +154,14 @@ bld/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
-images/
 *.pdb
-*.exe/*
-!/window_appexe/netcoreapp3.1/RestSharp.dll
-!/window_appexe/netcoreapp3.1/Newtonsoft.Json.dll
+*./exe/*
+window_app/exe/
+!window_app/exe/netcoreapp3.1/RestSharp.dll
+!window_app/exe/netcoreapp3.1/Newtonsoft.Json.dll
+
+
+
+
+# Docker
+
