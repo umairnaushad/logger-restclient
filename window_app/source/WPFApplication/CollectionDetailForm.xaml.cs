@@ -6,14 +6,14 @@ namespace WPFApplication
     /// <summary>
     /// Interaction logic for ArtworkForm.xaml
     /// </summary>
-    public partial class ArtworkForm : Window
+    public partial class CollectionDetailForm : Window
     {
-        public ArtworkForm()
+        public CollectionDetailForm()
         {
             InitializeComponent();
         }
         
-        public ArtworkForm(ArtCollectionDetail artwork):this()
+        public CollectionDetailForm(ArtCollectionDetail artwork):this()
         {
             DataContext = artwork;
         }

@@ -199,11 +199,12 @@ namespace WPFApplication
             int selectedIndex = dataGridView1.SelectedIndex;
             if (selectedIndex >= 0 && selectedIndex < artworkList.Count)
             {
-                string objecNumber = artworkList[selectedIndex].ObjectNumber;
-                MessageBox.Show(selectedIndex + " - " + objecNumber);
-                //ArtCollectionDetail detail = museumApi.GetCollectionDetailByObjectNumber(objecNumber);
-                //ArtworkForm win2 = new ArtworkForm(detail);
-                //win2.ShowDialog();
+                int index = numberOfRecPerPage * artworkPagedTable.PageIndex + selectedIndex;
+                string objecNumber = artworkList[index].ObjectNumber;
+                //MessageBox.Show(index + " - " + objecNumber);
+                ArtCollectionDetail detail = museumApi.GetCollectionDetailByObjectNumber(objecNumber);
+                CollectionDetailForm win2 = new CollectionDetailForm(detail);
+                win2.ShowDialog();
             }
         }
     }

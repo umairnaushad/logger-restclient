@@ -12,7 +12,7 @@
             <Label Content="Select Artist: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
             <ComboBox x:Name="cb_ArtistName" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Width="190" FontSize="14"/>
             <Button x:Name="button_FetchCollectionList" Content="Fetch Collection List" Margin="180,10,0,0" VerticalAlignment="Top" Click="button_FetchCollectionList_Click" Width="190" FontSize="14"/>
-            <Label Content="Click on a picture to get more detail" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Medium" Foreground="Green"/>
+            <Label Content="Double click on a picture to get more detail" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Medium" Foreground="Green"/>
         </Grid>
 
         <DataGrid x:Name="dataGridView1" Height="500" Width="780" HorizontalAlignment="Center" Margin="0,80,0,0"
