@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Windows;
 
 namespace WPFApplication
@@ -101,16 +102,37 @@ namespace WPFApplication
         }
 
 
+        private void SaveImageAsThumbnails_2()
+        {
+            using (WebClient client = new WebClient())
+            {
+                for (int i = 0; i < artworkList.Count; i++)
+                {
+                    Stream stream = client.OpenRead(artworkList[i].ImageURL);
+                    Bitmap original;
+                    original = new Bitmap(stream);
+                    Bitmap resized = new Bitmap(original, new System.Drawing.Size(original.Width / 4, original.Height / 4));
+                    resized.Save(artworkList[i].ImageLocalPathThumbnail);
+                }
+            }
+        }
+
 
         private void SaveImageAsThumbnails()
         {
+            Stream stream;
+            Image image;
+            Image thumbnail;
+            using WebClient client = new WebClient();
             for (int i = 0; i < artworkList.Count; i++)
             {
-                Image image = Image.FromFile(artworkList[i].ImageLocalPath);
+                stream = client.OpenRead(artworkList[i].ImageURL);
+                //Image image = Image.FromFile(artworkList[i].ImageLocalPath);
+                image = Image.FromStream(stream);
 
                 System.Drawing.Size thumbnailSize = GetThumbnailSize(image);
 
-                Image thumbnail = image.GetThumbnailImage(thumbnailSize.Width,
+                thumbnail = image.GetThumbnailImage(thumbnailSize.Width,
                     thumbnailSize.Height, null, IntPtr.Zero);
 
                 thumbnail.Save(artworkList[i].ImageLocalPathThumbnail);
