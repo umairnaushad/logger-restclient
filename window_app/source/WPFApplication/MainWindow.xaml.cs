@@ -68,13 +68,15 @@ namespace WPFApplication
 
         #region UI Controls
 
-        private void button_FetchCollectionList_Click(object sender, RoutedEventArgs e)
+        private async void button_FetchCollectionList_Click(object sender, RoutedEventArgs e)
         {
             button_FetchCollectionList.IsEnabled = false;
+            museumApi.GetCollectionsListByArtistNameAsync(cb_ArtistName.SelectedItem.ToString());
+            artworkList = museumApi.artworkParsedList;
             //ClearImages();
             //await FetchArtworkDetail();
             FetchCollectionList();
-            SaveImageAsThumbnails();
+            //SaveImageAsThumbnails();
             button_FetchCollectionList.IsEnabled = true;
         }
 
@@ -99,7 +101,7 @@ namespace WPFApplication
         //public async Task<List<Words>> FindWordCountsAsync()
         public void FetchCollectionList()
         {
-            artworkList = museumApi.GetCollectionsListByArtistName(cb_ArtistName.SelectedItem.ToString());
+            //artworkList = museumApi.GetCollectionsListByArtistName(cb_ArtistName.SelectedItem.ToString());
             dataGridView1.ItemsSource = artworkPagedTable.First(artworkList, numberOfRecPerPage).DefaultView;
             lb_PagrInfo.Content = PageNumberDisplay();
         }

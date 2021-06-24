@@ -15,9 +15,9 @@
             <Label FontWeight="Bold" Content="Elapsed Seconds (ms): " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <Label FontWeight="Bold" Content="Object Number: " HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
             <Label FontWeight="Bold" Content="Priref: " HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label_ElapsedMilliseconds" Content="{Binding Path=ElapsedMilliseconds}" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label_ObjectNumber" Content="{Binding Path=ObjectNumber}" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label_Priref" Content="{Binding Path=Priref}" HorizontalAlignment="Left" Margin="130,70,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_ElapsedMilliseconds" Content="{Binding Path=ElapsedMilliseconds}" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_ObjectNumber" Content="{Binding Path=ObjectNumber}" HorizontalAlignment="Left" Margin="150,40,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_Priref" Content="{Binding Path=Priref}" HorizontalAlignment="Left" Margin="150,70,0,0" VerticalAlignment="Top"/>
             <Label FontWeight="Bold" Content="Principal Maker: " HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top"/>
             <Label FontWeight="Bold" Content="Acquisition Method: " HorizontalAlignment="Left" Margin="330,40,0,0" VerticalAlignment="Top"/>
             <Label FontWeight="Bold" Content="Acquisition Date: " HorizontalAlignment="Left" Margin="330,70,0,0" VerticalAlignment="Top"/>
