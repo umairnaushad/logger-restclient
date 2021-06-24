@@ -5,8 +5,11 @@ import sys
 """
 Following is the decleration of data structures to be used during processing
 """
+# List to store minute value/name (including date) against each unique minute
 list_minute=[]
+# list to store total number of matched minutes against each unique minute
 list_count=[]
+# List of list to store message count against each line
 list_process_count=[]
 process_names = ["Safari[4589]", "syslogd[139]", "Microsoft Remote Desktop[4395]", "systemstats[150]", "timed[180]"]
 process_count = [0,0,0,0,0]
@@ -83,9 +86,9 @@ def printParsedMessages():
 
 
 """
-Verify that file to be parsed is passed as argument
-Call functions to parse data and print it on console
-Also print the total execution time
+Verifying that file to be parsed is passed as argument.
+Call functions to parse data and print it on console,
+Also print the total execution time.
 """
 if len(sys.argv) < 2:
     print("Invalid arguments, please pass valid text file name")
