@@ -17,5 +17,10 @@ namespace WPFApplication
         {
             DataContext = artwork;
         }
+
+        private void artworkForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            image_Large.Source = null;
+        }
     }
 }

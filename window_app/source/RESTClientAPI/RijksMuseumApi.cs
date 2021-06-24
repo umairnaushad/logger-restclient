@@ -58,10 +58,10 @@ namespace RESTClient
 
             restRequest = new RestRequest("collection?key=" + apiKey + "&involvedMaker=" + artistName, Method.GET);
             
-            //restResponse = await restClient.ExecuteAsync(restRequest);
-            Task<IRestResponse> t = restClient.ExecuteAsync(restRequest);
-            t.Wait();
-            restResponse = await t;
+            restResponse = await restClient.ExecuteAsync(restRequest);
+            //Task<IRestResponse> t = restClient.ExecuteAsync(restRequest);
+            //t.Wait();
+            //restResponse = await t;
 
             jsonObject = JObject.Parse(restResponse.Content);
 
@@ -92,7 +92,8 @@ namespace RESTClient
             string imageLocalPath = Directory.GetCurrentDirectory() + "\\images\\" + detail.artObject.objectNumber + ".png";
             using (WebClient client = new WebClient())
             {
-                client.DownloadFile(new Uri(detail.artObject.webImage.url), imageLocalPath);
+                if (!File.Exists(imageLocalPath))
+                    client.DownloadFile(new Uri(detail.artObject.webImage.url), imageLocalPath);
             }
             return new ArtCollectionDetail(detail.artObject.priref,
                 detail.elapsedMilliseconds, detail.artObject.objectNumber, detail.artObject.webImage.guid,

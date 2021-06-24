@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace WPFApplication
@@ -66,17 +68,15 @@ namespace WPFApplication
 
         #endregion
 
-        #region UI Controls
+        #region UI Control Events
 
         private async void button_FetchCollectionList_Click(object sender, RoutedEventArgs e)
         {
             button_FetchCollectionList.IsEnabled = false;
-            museumApi.GetCollectionsListByArtistNameAsync(cb_ArtistName.SelectedItem.ToString());
-            artworkList = museumApi.artworkParsedList;
-            //ClearImages();
-            //await FetchArtworkDetail();
-            FetchCollectionList();
-            //SaveImageAsThumbnails();
+            string artisName = cb_ArtistName.SelectedItem.ToString();
+            var items = await Task.Run(() => FetchCollectionList(artisName));
+            UpdateDataGridItemSource();
+            SaveImageAsThumbnails();
             button_FetchCollectionList.IsEnabled = true;
         }
 
@@ -98,18 +98,26 @@ namespace WPFApplication
 
         #region REST API Calls
 
-        //public async Task<List<Words>> FindWordCountsAsync()
-        public void FetchCollectionList()
+        public void UpdateDataGridItemSource()
         {
-            //artworkList = museumApi.GetCollectionsListByArtistName(cb_ArtistName.SelectedItem.ToString());
             dataGridView1.ItemsSource = artworkPagedTable.First(artworkList, numberOfRecPerPage).DefaultView;
             lb_PagrInfo.Content = PageNumberDisplay();
+        }
+
+        public IList<ArtCollectionList> FetchCollectionList(string artisName)
+        {
+            artworkList = museumApi.GetCollectionsListByArtistName(artisName);
+            return artworkList;
+        }
+
+        public ArtCollectionDetail FetchCollectionDetail(string objectNumber)
+        {
+            return museumApi.GetCollectionDetailByObjectNumber(objectNumber);
         }
 
         #endregion
 
         #region Utility Functions
-
         private void PopulateArtistListFromFile()
         {
             string[] lineOfContents = File.ReadAllLines("artistsList.txt");
@@ -172,31 +180,8 @@ namespace WPFApplication
 
 
 
-        private void SaveImageAsThumbnails_2()
-        {
-            using (WebClient client = new WebClient())
-            {
-                for (int i = 0; i < artworkList.Count; i++)
-                {
-                    Stream stream = client.OpenRead(artworkList[i].ImageURL);
-                    Bitmap original;
-                    original = new Bitmap(stream);
-                    Bitmap resized = new Bitmap(original, new System.Drawing.Size(original.Width / 4, original.Height / 4));
-                    resized.Save(artworkList[i].ImageLocalPathThumbnail);
-                }
-            }
-        }
-                
-        private Image GetCopyImage(string path)
-        {
-            using (Image im = Image.FromFile(path))
-            {
-                Bitmap bm = new Bitmap(im);
-                return bm;
-            }
-        }
 
-        private void dataGridView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void dataGridView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             int selectedIndex = dataGridView1.SelectedIndex;
             if (selectedIndex >= 0 && selectedIndex < artworkList.Count)
@@ -204,10 +189,20 @@ namespace WPFApplication
                 int index = numberOfRecPerPage * artworkPagedTable.PageIndex + selectedIndex;
                 string objecNumber = artworkList[index].ObjectNumber;
                 //MessageBox.Show(index + " - " + objecNumber);
-                ArtCollectionDetail detail = museumApi.GetCollectionDetailByObjectNumber(objecNumber);
-                CollectionDetailForm win2 = new CollectionDetailForm(detail);
-                win2.ShowDialog();
+                ArtCollectionDetail detail = await Task.Run(() => FetchCollectionDetail(objecNumber));
+                CollectionDetailForm detailForm = new CollectionDetailForm(detail);
+                detailForm.ShowDialog();
+                detailForm.Close();
             }
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            button_FetchCollectionList.IsEnabled = false;
+            string artisName = cb_ArtistName.SelectedItem.ToString();
+            var items = await Task.Run(() => FetchCollectionList(artisName));
+            UpdateDataGridItemSource();
+            button_FetchCollectionList.IsEnabled = true;
         }
     }
 }
