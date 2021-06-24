@@ -136,6 +136,8 @@ namespace WPFApplication
             using WebClient client = new WebClient();
             for (int i = 0; i < artworkList.Count; i++)
             {
+                if ( String.IsNullOrEmpty(artworkList[i].ImageURL) )
+                    continue;
                 stream = client.OpenRead(artworkList[i].ImageURL);
                 image = Image.FromStream(stream);
                 System.Drawing.Size thumbnailSize = GetThumbnailSize(image);
