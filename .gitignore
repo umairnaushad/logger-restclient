@@ -162,6 +162,11 @@ window_app/exe/netcoreapp3.1/*
 !window_app/exe/netcoreapp3.1/RestSharp.dll
 !window_app/exe/netcoreapp3.1/Newtonsoft.Json.dll
 !window_app/exe/netcoreapp3.1/artistsList.txt
+!window_app/exe/netcoreapp3.1/UIAutomationTypes.dll
+!window_app/exe/netcoreapp3.1/UIAutomationProvider.dll
+!window_app/exe/netcoreapp3.1/UIAutomationClient.dll
+!window_app/exe/netcoreapp3.1/UIAutomationClientsideProviders.dll
+!window_app/exe/netcoreapp3.1/images
 
 
 
