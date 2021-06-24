@@ -31,5 +31,15 @@ namespace RESTClientUnitTests
             Assert.AreEqual(expectedGuid, detail.Guid);
         }
 
+        [Test]
+        public void TestArtistListCount()
+        {
+            int expectedCount = 7000;
+            int actualCount = 0;
+            RijksMuseumApi obj = new RijksMuseumApi();
+            actualCount = obj.GetArtistsCount();
+            Assert.GreaterOrEqual(actualCount, expectedCount);
+        }
+
     }
 }

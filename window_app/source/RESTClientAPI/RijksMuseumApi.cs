@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Drawing;
-using System.Threading.Tasks;
 
 namespace RESTClient
 {
@@ -57,14 +55,8 @@ namespace RESTClient
             string imageLocalPathThumbnail = "";
 
             restRequest = new RestRequest("collection?key=" + apiKey + "&involvedMaker=" + artistName, Method.GET);
-            
             restResponse = await restClient.ExecuteAsync(restRequest);
-            //Task<IRestResponse> t = restClient.ExecuteAsync(restRequest);
-            //t.Wait();
-            //restResponse = await t;
-
             jsonObject = JObject.Parse(restResponse.Content);
-
             var artworkList = JsonConvert.DeserializeObject<CollectionListAPIResponse.Root>(jsonObject.ToString());
             artworkParsedList = new List<ArtCollectionList>();
             for (int i = 0; i < artworkList.artObjects.Count; i++)
@@ -102,6 +94,23 @@ namespace RESTClient
                 detail.artObject.acquisition.method, detail.artObject.acquisition.date,
                 detail.artObject.longTitle, detail.artObject.webImage.url, imageLocalPath
                 );
+        }
+
+        public int GetArtistsCount()
+        {
+            restRequest = new RestRequest("collection?key=" + apiKey + "&q=artist", Method.GET);
+            restResponse = (RestResponse)restClient.Execute(restRequest);
+            jsonObject = JObject.Parse(restResponse.Content);
+            CollectionDetailAPIResponse.Root detail = JsonConvert.DeserializeObject<CollectionDetailAPIResponse.Root>(jsonObject.ToString());
+            ArtistListAPIResponse.Root artistList = JsonConvert.DeserializeObject<ArtistListAPIResponse.Root>(jsonObject.ToString());
+            string[] artistName = new string[artistList.artObjects.Count];
+            for (int i = 0; i < artistList.artObjects.Count; i++)
+            {
+                artistName[i] = artistList.artObjects[i].principalOrFirstMaker.ToString();
+            }
+            //File.WriteAllLines("artistsList.txt", artistName);
+            Console.WriteLine("restResponse.Content = " + restResponse.Content.ToString());
+            return artistList.count;
         }
     }
 }
