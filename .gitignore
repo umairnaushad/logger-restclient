@@ -166,7 +166,7 @@ window_app/exe/*
 !window_app/exe/UIAutomationProvider.dll
 !window_app/exe/UIAutomationClient.dll
 !window_app/exe/UIAutomationClientsideProviders.dll
-!window_app/exe/images
+!window_app/exe/images/empty.txt
 !window_app/exe/StartApplication.bat
 
 
