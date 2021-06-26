@@ -17,9 +17,12 @@ namespace GUINUnitTest
         public void LaunchApplication()
         {
             CloseApplication();
-            string applicationPath = Directory.GetParent(
+            string applicationPath = (
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
-                ).FullName + "\\" + "StartApplication.bat";// applicationName;
+                ) + "\\" + applicationName;
+            if (applicationPath.Contains("\\net45"))
+                applicationPath = applicationPath.Replace("net45", "");
+            
             Console.WriteLine("############################");
             Console.WriteLine(applicationPath);
             Process p = Process.Start(applicationPath);

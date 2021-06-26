@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>RESTClientNUnitTests</RootNamespace>
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+  
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\exe</OutputPath>
@@ -24,9 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="RESTClientAPI">
-      <HintPath>..\..\exe\netcoreapp3.1\RESTClientAPI.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\RESTClientAPI\RESTClientAPI.csproj" />
   </ItemGroup>
 
 </Project>

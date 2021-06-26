@@ -7,6 +7,10 @@
     <AssemblyName>RijksMuseumApplication</AssemblyName>
   </PropertyGroup>
 
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>../../exe</OutputPath>
   </PropertyGroup>
@@ -20,9 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="RESTClientAPI">
-      <HintPath>..\..\exe\netcoreapp3.1\RESTClientAPI.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\RESTClientAPI\RESTClientAPI.csproj" />
   </ItemGroup>
 
 </Project>

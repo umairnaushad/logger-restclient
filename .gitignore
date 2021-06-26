@@ -157,17 +157,17 @@ TestResults/
 
 *.pdb
 *./exe/*
-window_app/exe/netcoreapp3.1/*
+window_app/exe/*
 
-!window_app/exe/netcoreapp3.1/RestSharp.dll
-!window_app/exe/netcoreapp3.1/Newtonsoft.Json.dll
-!window_app/exe/netcoreapp3.1/artistsList.txt
-!window_app/exe/netcoreapp3.1/UIAutomationTypes.dll
-!window_app/exe/netcoreapp3.1/UIAutomationProvider.dll
-!window_app/exe/netcoreapp3.1/UIAutomationClient.dll
-!window_app/exe/netcoreapp3.1/UIAutomationClientsideProviders.dll
-!window_app/exe/netcoreapp3.1/images
-!window_app/exe/netcoreapp3.1/StartApplication.bat
+!window_app/exe/RestSharp.dll
+!window_app/exe/Newtonsoft.Json.dll
+!window_app/exe/artistsList.txt
+!window_app/exe/UIAutomationTypes.dll
+!window_app/exe/UIAutomationProvider.dll
+!window_app/exe/UIAutomationClient.dll
+!window_app/exe/UIAutomationClientsideProviders.dll
+!window_app/exe/images
+!window_app/exe/StartApplication.bat
 
 
 
