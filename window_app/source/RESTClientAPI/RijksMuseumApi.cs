@@ -36,10 +36,17 @@ namespace RESTClient
             string objectNumber = "", title = "", longTitle = "", principalOrFirstMaker = "";
             string url="", imageLocalPath="", imageLocalPathThumbnail="";
             int width = 0, height = 0;
+
+            string folderName = Directory.GetCurrentDirectory() + "\\images\\";
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+
             for (int i = 0; i < artworkList.artObjects.Count; i++)
             {
-                imageLocalPath = Directory.GetCurrentDirectory() + "\\images\\" + artworkList.artObjects[i].objectNumber + ".png";
-                imageLocalPathThumbnail = Directory.GetCurrentDirectory() + "\\images\\" + artworkList.artObjects[i].objectNumber + "-thumbnail.png";
+                imageLocalPath = folderName + artworkList.artObjects[i].objectNumber + ".png";
+                imageLocalPathThumbnail = folderName + artworkList.artObjects[i].objectNumber + "-thumbnail.png";
 
                 #region Check for null response form API
 
@@ -92,7 +99,12 @@ namespace RESTClient
             {
                 jsonObject = JObject.Parse(restResponse.Content);
                 detail = JsonConvert.DeserializeObject<CollectionDetailAPIResponse.Root>(jsonObject.ToString());
-                string imageLocalPath = Directory.GetCurrentDirectory() + "\\images\\" + detail.artObject.objectNumber + ".png";
+                string folderName = Directory.GetCurrentDirectory() + "\\images\\";
+                if (!Directory.Exists(folderName))
+                {
+                    Directory.CreateDirectory(folderName);
+                }
+                string imageLocalPath = folderName + detail.artObject.objectNumber + ".png";
                 using (WebClient client = new WebClient())
                 {
                     if (!File.Exists(imageLocalPath))

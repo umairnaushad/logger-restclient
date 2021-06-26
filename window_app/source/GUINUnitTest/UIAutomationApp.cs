@@ -20,8 +20,8 @@ namespace GUINUnitTest
             string applicationPath = (
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
                 ) + "\\" + applicationName;
-            if (applicationPath.Contains("\\net45"))
-                applicationPath = applicationPath.Replace("net45", "");
+            //if (applicationPath.Contains("\\net45"))
+                //applicationPath = applicationPath.Replace("net45", "");
             
             Console.WriteLine("############################");
             Console.WriteLine(applicationPath);
