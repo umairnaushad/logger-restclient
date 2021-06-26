@@ -2,9 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
-
     <IsPackable>false</IsPackable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>	  
   </PropertyGroup>
+
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+	
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>../../exe/netcoreapp3.1</OutputPath>

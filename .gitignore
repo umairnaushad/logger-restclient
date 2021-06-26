@@ -167,6 +167,7 @@ window_app/exe/netcoreapp3.1/*
 !window_app/exe/netcoreapp3.1/UIAutomationClient.dll
 !window_app/exe/netcoreapp3.1/UIAutomationClientsideProviders.dll
 !window_app/exe/netcoreapp3.1/images
+!window_app/exe/netcoreapp3.1/StartApplication.bat
 
 
 
