@@ -1,4 +1,4 @@
-# logger-restclient
+# Rijksmuseum Desktop Application
 This project uses Rijksmuseum REST API to display the list of collections for a particular artist. It will fetch the information regarding each collection and will store it in its internal data structures. The thumbnail image against each collection will be stored on disk. By cliking on any picture of a collection, application will call another endpoint of Rijksmuseum REST API and will get the further detail about the collection including the large image which will be stored on disk. The solution consists of following four projects:
 - RESTClientAPI
   <br/> Uses "RestRequest" and "RestClient" to get data from REST API. Parses the JSON response and store that in data structure.
