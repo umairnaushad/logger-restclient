@@ -33,10 +33,10 @@ To start the application execute below commands on CMD:
 
 ### 3.1 Using Desktop Application
 After launching the application, below window will appear
-![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Launch-App.png)
+![alt text](https://github.com/umairnaushad/parser-restclient/blob/develop/snapshots/Launch-App.png)
 <br/><br/>
 Select artist from the combo box and then click on "Fetch Collection List" butotn
-![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Fetch-Data.png)
+![alt text](https://github.com/umairnaushad/parser-restclient/blob/develop/snapshots/Fetch-Data.png)
 <br/><br/>
 Click on a picture to get detail view of a collection
 ![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Collection-Detail.png)
