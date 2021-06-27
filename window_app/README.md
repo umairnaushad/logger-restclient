@@ -18,49 +18,41 @@ Two projects will be build and output should be similar to
 <br/><br/><br/>
 
 ## 3.0 Execute Desktop Application
-The steps to execute the application are as follows:
+To start the application execute below commands on CMD:
 - cd exe
 - RijksMuseumApplication.exe
 
 ### 3.1 Using Desktop Application
 After launching the application, below window will appear
 ![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Launch-App.png)
-<br /><br /><br />
-
+<br/><br/>
 Select artist from the combo box and then click on "Fetch Collection List" butotn
 ![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Fetch-Data.png)
-<br /><br /><br />
-
-
+<br/><br/>
 Click on a picture to get detail view of a collection
 ![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Collection-Detail.png)
+<br/><br/><br/>
 
 ## 4.0 Execute Automation Test Cases/Scripts
 ### 4.1 Build the Test Projects
-The solution contains two automation testing projects. Once for the unit test cases for backend API and second one for the UI Automation test cases for the GUI.
-To build the test projects make sure that you are in "parser-restclient\window_app" folder and eexecute below command on CMD:
+The solution contains two automation testing projects. One for the unit test cases for backend API and second one for the UI Automation test cases for the GUI.
+To build the test projects, make sure that you are in "parser-restclient\window_app" folder and execute below command on CMD:
 - build_test_projects.bat
-<br/><br/>
-Two projects will be build and output should be similar to 
 ![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Build-AutomationTests.png)
-<br/><br/><br/>
+Two projects will be build and output should be similar to above image
+<br/><br/>
+
 ### 4.2 Execute the Unit Test Cases
-The steps to execute the application are as follows:
+Make sure that you are in "parser-restclient\window_app\source\RESTClientNUnitTests" folder and execute the below command:
+- dotnet test --logger html
+![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Unit-Test-Execution.png)
+The above image contains the test report path and it will be similar to:
+![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/Unit-Test-Report.png)
+<br/><br/><br/>
 
 ### 4.2 Execute the GUI Test Cases
 Make sure that you are in "parser-restclient\window_app\exe" folder and execute the below command:
-
-
-dotnet test RESTClientNUnitTests.dll --logger "console;verbosity=detailed;html"
-dotnet test --logger "console;verbosity=detailed;html"
-&nbsp;
-&nbsp;
-
-
-&nbsp;
-dotnet test RESTClientNUnitTests.dll --logger html
-
-dotnet test window_app\source\RESTClientNUnitTests\ --logger html
-
-report path:
-\window_app\source\RESTClientNUnitTests\TestResults
+- dotnet test GUINUnitTest.dll --logger html
+![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/GUI-Test-Execution.png)
+The above image contains the test report path and it will be similar to:
+![alt text](https://github.com/umairnaushad/parser-restclient/blob/main/snapshots/GUI-Test-Report.png)
