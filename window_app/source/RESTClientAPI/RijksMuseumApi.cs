@@ -105,18 +105,37 @@ namespace RESTClient
                     Directory.CreateDirectory(folderName);
                 }
                 string imageLocalPath = folderName + detail.artObject.objectNumber + ".png";
+                ArtCollectionDetail collectionDetail = new ArtCollectionDetail();
                 using (WebClient client = new WebClient())
                 {
-                    if (!File.Exists(imageLocalPath))
-                        client.DownloadFile(new Uri(detail.artObject.webImage.url), imageLocalPath);
+                    #region Check for null response form API
+
+                    if(detail.artObject != null)
+                    {
+                        collectionDetail.Priref = detail.artObject.priref;
+                        collectionDetail.ElapsedMilliseconds = detail.elapsedMilliseconds.ToString();
+                        collectionDetail.ObjectNumber = detail.artObject.objectNumber;
+                        collectionDetail.Description = detail.artObject.description;
+                        collectionDetail.PrincipalMaker = detail.artObject.principalMaker;
+                        collectionDetail.AcquisitionDate = detail.artObject.acquisition.date.ToString();
+                        collectionDetail.AcquisitionMethod = detail.artObject.acquisition.method;
+                        collectionDetail.LongTitle = detail.artObject.longTitle;
+                    }
+
+                    if (detail.artObject.webImage != null)
+                    {
+                        collectionDetail.ImageURL = detail.artObject.webImage.url;
+                        collectionDetail.Guid = detail.artObject.webImage.guid;
+                        collectionDetail.Width = detail.artObject.webImage.width.ToString();
+                        collectionDetail.Height = detail.artObject.webImage.height.ToString();
+                        collectionDetail.ImageLocalPath = imageLocalPath;
+                        if (!File.Exists(imageLocalPath))
+                            client.DownloadFile(new Uri(detail.artObject.webImage.url), imageLocalPath);
+                    }
+
+                    #endregion                    
                 }
-                return new ArtCollectionDetail(detail.artObject.priref,
-                    detail.elapsedMilliseconds, detail.artObject.objectNumber, detail.artObject.webImage.guid,
-                    detail.artObject.webImage.width, detail.artObject.webImage.height,
-                    detail.artObject.description, detail.artObject.principalMaker,
-                    detail.artObject.acquisition.method, detail.artObject.acquisition.date,
-                    detail.artObject.longTitle, detail.artObject.webImage.url, imageLocalPath
-                    );
+                return collectionDetail;
             }
 
             return new ArtCollectionDetail("N/A",

@@ -19,6 +19,12 @@ namespace RESTClient
         public string ImageURL { get; set; }
         public string ImageLocalPath { get; set; }
         public Image fullSizeImage { get; set; }
+
+        public ArtCollectionDetail()
+        {
+
+        }
+
         public ArtCollectionDetail(string priref, int elapsedMilliseconds, string objectNumber, string guid, int width,
             int height, string description, string principalMaker, string acquisitionMethod,
             DateTime acquisitionDate, string longTitle, string imageURL, string imageLocalPath)

@@ -98,17 +98,24 @@ namespace WPFApplication
 
         private async void UpdateCollectionData()
         {
-            button_FetchCollectionList.IsEnabled = false;
-            lb_RESTStatus.Visibility = Visibility.Visible;
-            lb_RESTStatus.Foreground = new SolidColorBrush(Colors.Red);
-            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            string artisName = cb_ArtistName.SelectedItem.ToString();
-            var items = await Task.Run(() => FetchCollectionList(artisName));
-            var returnStatus = await Task.Run(() => SaveImageAsThumbnails());
-            UpdateDataGridItemSource();
-            button_FetchCollectionList.IsEnabled = true;
-            lb_RESTStatus.Visibility = Visibility.Hidden;
-            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
+            try
+            {
+                button_FetchCollectionList.IsEnabled = false;
+                lb_RESTStatus.Visibility = Visibility.Visible;
+                lb_RESTStatus.Foreground = new SolidColorBrush(Colors.Red);
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                string artisName = cb_ArtistName.SelectedItem.ToString();
+                var items = await Task.Run(() => FetchCollectionList(artisName));
+                var returnStatus = await Task.Run(() => SaveImageAsThumbnails());
+                UpdateDataGridItemSource();
+                button_FetchCollectionList.IsEnabled = true;
+                lb_RESTStatus.Visibility = Visibility.Hidden;
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button_FetchCollectionList_Click(object sender, RoutedEventArgs e)
@@ -121,13 +128,18 @@ namespace WPFApplication
             int selectedIndex = dataGridView1.SelectedIndex;
             if (selectedIndex >= 0 && selectedIndex < artworkList.Count)
             {
-                int index = numberOfRecPerPage * artworkPagedTable.PageIndex + selectedIndex;
-                string objecNumber = artworkList[index].ObjectNumber;
-                //MessageBox.Show(index + " - " + objecNumber);
-                ArtCollectionDetail detail = await Task.Run(() => FetchCollectionDetail(objecNumber));
-                CollectionDetailForm detailForm = new CollectionDetailForm(detail);
-                detailForm.ShowDialog();
-                detailForm.Close();
+                try { 
+                    int index = numberOfRecPerPage * artworkPagedTable.PageIndex + selectedIndex;
+                    string objecNumber = artworkList[index].ObjectNumber;
+                    ArtCollectionDetail detail = await Task.Run(() => FetchCollectionDetail(objecNumber));
+                    CollectionDetailForm detailForm = new CollectionDetailForm(detail);
+                    detailForm.ShowDialog();
+                    detailForm.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
