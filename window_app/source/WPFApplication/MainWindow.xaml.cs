@@ -1,13 +1,15 @@
 ﻿using RESTClient;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace WPFApplication
 {
@@ -18,17 +20,40 @@ namespace WPFApplication
         private IList<ArtCollectionList> artworkList = new List<ArtCollectionList>();
         private IList<ArtCollectionList> artworkListNull = new List<ArtCollectionList>();
         private RijksMuseumApi museumApi = new RijksMuseumApi();
+        private int counter = 1;
+        private int cacheRefreshCounter = 1;
+        private int resultsPerPage = 1;
+        private DispatcherTimer timer = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
             PopulateArtistListFromFile();
+            cacheRefreshCounter = Int32.Parse(ConfigurationManager.AppSettings.Get("CacheInterval"));
+            resultsPerPage = Int32.Parse(ConfigurationManager.AppSettings.Get("ResultsPerPage"));
+            counter = cacheRefreshCounter;
+
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
         }
 
-        private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
+        void timer_Tick(object sender, EventArgs e)
         {
-            
+            counter--;
+            if (counter <= 0)
+            {
+                counter = cacheRefreshCounter;
+                timer.Stop();
+                UpdateCollectionData();
+                timer.Start();
+            }
+
+            int minutes = counter / 60;
+            int seconds = counter % 60;
+            lb_Timer.Content = "Remaining Cache Refresh Time: " + minutes + ":" + seconds;
         }
+
 
         #region Pagging
 
@@ -71,28 +96,39 @@ namespace WPFApplication
 
         #region UI Control Events
 
-        private async void button_FetchCollectionList_Click(object sender, RoutedEventArgs e)
+        private async void UpdateCollectionData()
         {
             button_FetchCollectionList.IsEnabled = false;
+            lb_RESTStatus.Visibility = Visibility.Visible;
+            lb_RESTStatus.Foreground = new SolidColorBrush(Colors.Red);
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             string artisName = cb_ArtistName.SelectedItem.ToString();
             var items = await Task.Run(() => FetchCollectionList(artisName));
+            var returnStatus = await Task.Run(() => SaveImageAsThumbnails());
             UpdateDataGridItemSource();
-            SaveImageAsThumbnails();
             button_FetchCollectionList.IsEnabled = true;
+            lb_RESTStatus.Visibility = Visibility.Hidden;
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void button_FetchCollectionList_Click(object sender, RoutedEventArgs e)
         {
-            
-            ClearImages();
+            UpdateCollectionData();
         }
 
-        private void ClearImages()
+        private async void dataGridView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            dataGridView1.ItemsSource = artworkListNull;
-            dataGridView1.ItemsSource = null;
-            dataGridView1.Items.Refresh();
-            dataGridView1.Items.Refresh();
+            int selectedIndex = dataGridView1.SelectedIndex;
+            if (selectedIndex >= 0 && selectedIndex < artworkList.Count)
+            {
+                int index = numberOfRecPerPage * artworkPagedTable.PageIndex + selectedIndex;
+                string objecNumber = artworkList[index].ObjectNumber;
+                //MessageBox.Show(index + " - " + objecNumber);
+                ArtCollectionDetail detail = await Task.Run(() => FetchCollectionDetail(objecNumber));
+                CollectionDetailForm detailForm = new CollectionDetailForm(detail);
+                detailForm.ShowDialog();
+                detailForm.Close();
+            }
         }
 
         #endregion
@@ -107,7 +143,7 @@ namespace WPFApplication
 
         public IList<ArtCollectionList> FetchCollectionList(string artisName)
         {
-            artworkList = museumApi.GetCollectionsListByArtistName(artisName);
+            artworkList = museumApi.GetCollectionsListByArtistName(artisName, resultsPerPage);
             return artworkList;
         }
 
@@ -119,6 +155,7 @@ namespace WPFApplication
         #endregion
 
         #region Utility Functions
+
         private void PopulateArtistListFromFile()
         {
             string[] lineOfContents = File.ReadAllLines("artistsList.txt");
@@ -129,7 +166,7 @@ namespace WPFApplication
             cb_ArtistName.SelectedIndex = 0;
         }
 
-        private void SaveImageAsThumbnails()
+        private string SaveImageAsThumbnails()
         {
             Stream stream;
             Image image;
@@ -152,6 +189,8 @@ namespace WPFApplication
                 }
                 artworkList[i].ThumbnailImage = thumbnail;
             }
+
+            return "Success";
         }
 
         private System.Drawing.Size GetThumbnailSize(Image original)
@@ -176,36 +215,9 @@ namespace WPFApplication
 
         #endregion
 
-
-
-
-
-
-
-
-
-        private async void dataGridView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void dataGridView1_MouseLeave(object sender, MouseEventArgs e)
         {
-            int selectedIndex = dataGridView1.SelectedIndex;
-            if (selectedIndex >= 0 && selectedIndex < artworkList.Count)
-            {
-                int index = numberOfRecPerPage * artworkPagedTable.PageIndex + selectedIndex;
-                string objecNumber = artworkList[index].ObjectNumber;
-                //MessageBox.Show(index + " - " + objecNumber);
-                ArtCollectionDetail detail = await Task.Run(() => FetchCollectionDetail(objecNumber));
-                CollectionDetailForm detailForm = new CollectionDetailForm(detail);
-                detailForm.ShowDialog();
-                detailForm.Close();
-            }
-        }
 
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            button_FetchCollectionList.IsEnabled = false;
-            string artisName = cb_ArtistName.SelectedItem.ToString();
-            var items = await Task.Run(() => FetchCollectionList(artisName));
-            UpdateDataGridItemSource();
-            button_FetchCollectionList.IsEnabled = true;
         }
     }
 }

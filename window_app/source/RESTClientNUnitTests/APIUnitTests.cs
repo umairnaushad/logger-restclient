@@ -7,6 +7,7 @@ namespace RESTClientUnitTests
     [TestFixture]
     public class Tests
     {
+        private int resultsPerPage = 10;
         [SetUp]
         public void Setup()
         {
@@ -18,7 +19,7 @@ namespace RESTClientUnitTests
             string artistName = "Vincent van Gogh";
             string expecteObjectNumber = "SK-A-3262";
             RijksMuseumApi obj = new RijksMuseumApi();
-            IList<ArtCollectionList> list = obj.GetCollectionsListByArtistName(artistName);
+            IList<ArtCollectionList> list = obj.GetCollectionsListByArtistName(artistName, resultsPerPage);
             Assert.AreEqual(expecteObjectNumber, list[0].ObjectNumber);
         }
 
