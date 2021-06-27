@@ -168,6 +168,7 @@ window_app/exe/*
 !window_app/exe/UIAutomationClientsideProviders.dll
 !window_app/exe/images/museum-icon.ico
 !window_app/exe/StartApplication.bat
+!window_app/exe/app.config
 
 
 

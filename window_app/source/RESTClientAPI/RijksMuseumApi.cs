@@ -22,10 +22,10 @@ namespace RESTClient
             restClient = new RestClient(uri);
         }
 
-        public List<ArtCollectionList> GetCollectionsListByArtistName(string artistName) {
+        public List<ArtCollectionList> GetCollectionsListByArtistName(string artistName, int resultsPerPage) {
 
             // Read data from REST endpoint and jsonify the response
-            restRequest = new RestRequest("collection?key="+ apiKey +"&involvedMaker="+artistName+"&ps=20", Method.GET);
+            restRequest = new RestRequest("collection?key="+ apiKey +"&involvedMaker="+artistName+"&ps="+ resultsPerPage, Method.GET);
             restResponse = (RestResponse)restClient.Execute(restRequest);
             jsonObject = JObject.Parse(restResponse.Content);
             CollectionListAPIResponse .Root artworkList = JsonConvert.DeserializeObject<CollectionListAPIResponse.Root>(jsonObject.ToString());

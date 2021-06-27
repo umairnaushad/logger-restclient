@@ -1,6 +1,7 @@
 ﻿using RESTClient;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -19,15 +20,19 @@ namespace WPFApplication
         private IList<ArtCollectionList> artworkList = new List<ArtCollectionList>();
         private IList<ArtCollectionList> artworkListNull = new List<ArtCollectionList>();
         private RijksMuseumApi museumApi = new RijksMuseumApi();
-        private int counter = 30;
-        private readonly int cacheRefreshCounter = 30;
+        private int counter = 1;
+        private int cacheRefreshCounter = 1;
+        private int resultsPerPage = 1;
         private DispatcherTimer timer = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
             PopulateArtistListFromFile();
-            
+            cacheRefreshCounter = Int32.Parse(ConfigurationManager.AppSettings.Get("CacheInterval"));
+            resultsPerPage = Int32.Parse(ConfigurationManager.AppSettings.Get("ResultsPerPage"));
+            counter = cacheRefreshCounter;
+
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
@@ -138,7 +143,7 @@ namespace WPFApplication
 
         public IList<ArtCollectionList> FetchCollectionList(string artisName)
         {
-            artworkList = museumApi.GetCollectionsListByArtistName(artisName);
+            artworkList = museumApi.GetCollectionsListByArtistName(artisName, resultsPerPage);
             return artworkList;
         }
 
@@ -209,6 +214,10 @@ namespace WPFApplication
         }
 
         #endregion
-                
+
+        private void dataGridView1_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

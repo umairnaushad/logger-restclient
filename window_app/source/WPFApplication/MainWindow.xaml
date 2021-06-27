@@ -18,6 +18,7 @@
             <ComboBox x:Name="cb_ArtistName" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Width="190" FontSize="14"/>
             <Button x:Name="button_FetchCollectionList" Content="Fetch Collection List" Margin="395,10,143,0" VerticalAlignment="Top" Click="button_FetchCollectionList_Click" FontSize="14"/>
             <Label x:Name="lb_Instructions" Content="Double click on a picture to get more detail" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Medium" Foreground="Green"/>
+            <Label x:Name="lb_RESTStatus" Content="Reading data from backedn API, please wait" HorizontalAlignment="Right" Margin="10,40,0,0" Foreground="Red" FontWeight="Medium" Visibility="Hidden"/>
         </Grid>
 
         <DataGrid x:Name="dataGridView1" Height="500" Width="780" HorizontalAlignment="Center" Margin="0,80,0,0"
@@ -32,7 +33,9 @@
                 <DataGridTemplateColumn x:Name="pictureColumn"  Header="Picture">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Cursor="Hand" x:Name="imageBox" Source="{Binding ImageLocalPathThumbnail}"></Image>
+                            <Image Cursor="Hand" x:Name="imageBox" Source="{Binding ImageLocalPathThumbnail}">
+                                
+                            </Image>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -66,9 +69,7 @@
 
         <Grid x:Name="grd_Footer" Margin="10,620,10,10" Height="40">
             <Label x:Name="lb_Timer" Content="..." HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Label x:Name="lb_RESTStatus" Content="Reading data from backedn API, please wait" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
-            
-        </Grid>
+       </Grid>
 
 
     </Grid>
