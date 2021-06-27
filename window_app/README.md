@@ -1,5 +1,14 @@
 # logger-restclient
-The purpose of 
+This project uses Rijksmuseum REST API to display the list of collections for a particular artist. It will fetch the information regarding each collection and will store it in its internal data structures. The thumbnail image against each collection will be stored on disk. By cliking on any picture of a collection, application will call another endpoint of Rijksmuseum REST API and will get the further detail about the collection including the large image which will be stored on disk. The solution consists of following four projects:
+- RESTClientAPI
+  <br/> Uses "RestRequest" and "RestClient" to get data from REST API. Parses the JSON response and store that in data structure.
+- RESTClientNUnitTests
+  <br/> NUnit test projects to test the RESTClientAPI.
+- WPFApplication
+  <br/> Desktop application to fetch and display the collected data from Rijksmuseum REST API. Application is developed in WPF, data grid is used to display dynamic data. Async/Wait is used to make sure that application will remain responsive during backend processing. Paging is used to limit the amount of data to be displayed on a single page and also to improve the responsiveness. Thumbnail images are being displayed on data grid to use less memory.
+- GUINUnitTest
+  <br/> UI test cases developed in UI Automation to test the GUI.
+<br/><br/><br/>
 
 ## 1.0 Required Software
 - .NET Core 3.1       (Used to develop backend API, WPF frontend application and API unit test scripts)
