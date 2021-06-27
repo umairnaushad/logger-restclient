@@ -3,6 +3,7 @@ using System.Threading;
 
 namespace GUINUnitTest
 {
+    [TestFixture]
     public class Tests
     {
         UIAutomationApp automationApp = new UIAutomationApp();

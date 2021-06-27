@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace RESTClientUnitTests
 {
+    [TestFixture]
     public class Tests
     {
         [SetUp]

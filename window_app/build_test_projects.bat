@@ -1,2 +1,2 @@
-dotnet build -c Release source\GUINUnitTest\
-dotnet build -c Release source\RESTClientNUnitTests\
+dotnet build -c Debug source\GUINUnitTest\
+dotnet build -c Debug source\RESTClientNUnitTests\
